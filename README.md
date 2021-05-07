@@ -4,3 +4,10 @@ this repository contains the code for the rest api tutorial with django restfram
 
 # API
     create snippets api - http://127.0.0.1:8000/code_snippets
+
+    get snippets by id - http://127.0.0.1:8000/code_snippets/:id 
+
+    update snippets by id -  http://127.0.0.1:8000/code_snippets/:id
+
+    delete snippets by id -  http://127.0.0.1:8000/code_snippets/:id
+
