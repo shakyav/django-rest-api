@@ -9,11 +9,19 @@ from django.contrib.auth.models import User
 from rest_framework import generics, permissions # new
 
 from .serializers import SnippetSerializer, UserSerializer # new
-from .permissions import IsOwnerOrReadOnly # new
+from .permissions import IsOwnerOrReadOnly # branch authentication
 
-# class SnippetList(generics.ListCreateAPIView):
-#     queryset = Snippet.objects.all()
-#     serializer_class = SnippetSerializer
+from rest_framework.decorators import api_view # branch root API endpoint
+from rest_framework.response import Response # branch root API endpoint
+from rest_framework.reverse import reverse # branch root API endpoint
+
+
+@api_view(['GET']) # branch root API endpoint
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'snippets': reverse('snippet-list', request=request, format=format)
+    })
 
 class SnippetList(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()

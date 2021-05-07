@@ -2,7 +2,9 @@
 this repository contains the code for the rest api tutorial with django restframework
 
 
-# API
+# APIs
+   # Root API  
+        http://127.0.0.1:8000
    # Snippets
         # public APIs
         get snippets - http://127.0.0.1:8000/code_snippets/
@@ -19,7 +21,7 @@ this repository contains the code for the rest api tutorial with django restfram
 
         delete snippets by id -  http://127.0.0.1:8000/code_snippets/:id
 
-    # Users
+   # Users
         # public APIs
         
         list all users - http://127.0.0.1:8000/users/
