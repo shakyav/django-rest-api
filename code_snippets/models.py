@@ -8,6 +8,51 @@ from pygments.formatters.html import HtmlFormatter # new
 from pygments.lexers import get_all_lexers, get_lexer_by_name # new
 
 
+class Customer(models.Model):
+    name = models.CharField(max_length=50,blank=True, default='')
+    
+    address = models.TextField(max_length=50,blank=True, default='')
+    email = models.EmailField(max_length=254,blank=False, default='')
+
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, related_name='customers', on_delete=models.CASCADE)
+
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "Order_"+self.id
+
+class Item(models.Model):
+    item_name = models.CharField(max_length=50,blank=True,default='')
+    category = [('tv','televeision'),('rdo','radio'),('tstr','toaster'),]
+    item_category = models.CharField(choices=category,default='',max_length=50)
+    quantity = models.IntegerField(default=0)
+    item_price = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.item_name
+
+class OrderItem(models.Model):
+    item = models.OneToOneField(
+        Item,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+
+    order = models.ManyToManyField("Order", related_name='order',default='')
+
+    quantity = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.order+"_"+self.item
+    
+
+
 
 class Snippet(models.Model):
     LEXERS = [item for item in get_all_lexers() if item[1]]
